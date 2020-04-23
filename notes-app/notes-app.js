@@ -8,6 +8,7 @@
 //     title: 'Office modification',
 //     body: 'Get a new seat'
 // }]
+'use strict'
 
 let notes = getSavedNotes()
 

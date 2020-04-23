@@ -1,3 +1,5 @@
+'use strict'
+
 // fake data initialization
 const init_value = () => {
     let todos = []
@@ -16,7 +18,11 @@ const init_value = () => {
 // Fetch existing todos from localStroage
 const getSavedTodos = () => {
     const todoJSON = localStorage.getItem('todos')
-    return todoJSON ? JSON.parse(todoJSON) : []
+    try{
+        return todoJSON ? JSON.parse(todoJSON) : []
+    }catch(e){
+        return []
+    }
 }
 
 // Save todos to localStorage

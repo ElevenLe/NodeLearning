@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <h1>Notes app</h1>
+        <h2>Take notes and never forget</h2>
+        <label>
+            Search: <input id='text-input' type="text" placeholder="filter to do">
+        </label>
+        <select id='filter-by'>
+            <option value="byEdited">Sort by last edited</option>
+            <option value='byCreated'>Sort by recently created</option>
+            <option value='alphabetically'>Sort alphabetically </option>
+        </select>
+        <div id="notes"></div>
+        <button id='create-note'>Create note</button>
+        <label>
+                <input id = "for-fun" type="checkbox"> check me for fun
+        </label>
+        <script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+        <script SRC="notes-functions.js"></script>
+        <script src="notes-app.js"></script>
+    </body>
+</html>

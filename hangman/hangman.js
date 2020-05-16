@@ -1,43 +1,73 @@
-// create a method for making a guess
-// 1. should accept a character for guessing
-// 2. should add unique guesses to list of guesses
-// 3. Should decrement the guesses left if a unique guess isn't match
-const Hangman = function (word, remainingGuesses){
-    this.word = word.toLowerCase().split(' ')
-    this.remainingGuesses = remainingGuesses
-    this.guessLatter = []
-}
+class Hangman{
+    constructor(word,remainingGuesses){
+        this.word = word.toLowerCase().split('')
+        this.remainingGuesses = remainingGuesses
+        this.guessLatter = []
+        this.status = "playing"        
+    }
+    get puzzle(){
+        let puzzle = ''
 
-Hangman.prototype.getPuzzle = function(){
-    let puzzle = ''
-
-    this.word.forEach((w) => {
-        if(this.guessLatter.includes(w) || w === ' '){
-            puzzle += w
+        this.word.forEach((w) => {
+            if(this.guessLatter.includes(w) || w === ' '){
+                puzzle += w
+            }
+            else{
+                puzzle += '*'
+            }
+        })
+        return puzzle        
+    }
+    guess(guess){
+        if(this.status === "playing"){
+            guess = guess.toLowerCase()
+            const isUnique =!this.guessLatter.includes(guess)
+            const isWrongGuess = !this.word.includes(guess)
+    
+            if(isUnique){
+                this.guessLatter.push(guess)
+            }
+    
+            if(isUnique && isWrongGuess){
+                this.remainingGuesses --
+            }
+    
+            this.calculateStatus()
+            console.log(this.status)
+        }
+    }
+    calculateStatus(){
+        if(this.status === "playing"){
+            if(this.remainingGuesses === 0 && this.getPuzzle().includes('*')){
+                this.status = "failed"
+            }
+            else if(!this.puzzle.includes('*')){
+                this.status = "finished"
+            }
+        }
+    
+        // const finished = this.word.every((letter) => this.guessLatter.includes(letter))
+        // if(this.remainingGuesses === 0){
+        //     this.status = 'failed'
+        // }
+        // else if(finished){
+        //     this.status = "finished"
+        // }
+        // else{
+        //     this.status = 'playing'
+        // }
+    }
+    get statusMessage(){
+        if(this.status === 'playing'){
+            return `Guesses left: ${this.remainingGuesses}`
+        }
+        else if(this.status === "finished"){
+            return `Great work! You guessed the word`
         }
         else{
-            puzzle += '*'
+            return `Nice try! The word was "${this.word.join("")}"`
         }
-    })
-    return puzzle
-}
-
-Hangman.prototype.guess = function(guess){
-    unique_guess = new Set
-    guess.forEach((w) => {
-        unique_guess.add(w)
-    })
-    unique_guess.forEach((w) =>{
-        this.guessLatter.push(w)
-    })
-    if(this.getPuzzle() !== this.word){
-        this.remainingGuesses -= 1
     }
 }
 
-const game1 = new Hangman('Cat', 2)
-game1.guess(['c','t','z'])
-console.log(game1.guessLatter)
-console.log(game1.getPuzzle())
 
-const game2 = new Hangman("City", 4)

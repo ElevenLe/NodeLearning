@@ -11,10 +11,36 @@ const renderHangman = function(){
     showDiv.appendChild(guessRemaining)
 }
 
-window.addEventListener('keypress',function(e){
+window.addEventListener('keypress',(e) =>{
     const guess = String.fromCharCode(e.charCode)
     game1.guess(guess)
     renderHangman()
 })
 
 renderHangman()
+
+
+getPuzzle().then((puzzle) => {
+    console.log(puzzle)
+}, (err) =>{
+    console.log(`error : ${err}`)
+})
+
+
+getCountryCallback("US", (error, country) =>{
+    if(error){
+        console.log(error)
+    }
+    else{
+        console.log(country)
+    }
+})
+
+
+// const countryCode = "US"
+
+getCountry("US").then((name) => {
+    console.log(name)
+}, (err) => [
+    console.log(`err is ${err}`)
+])

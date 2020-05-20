@@ -38,7 +38,7 @@ class Hangman{
     }
     calculateStatus(){
         if(this.status === "playing"){
-            if(this.remainingGuesses === 0 && this.getPuzzle().includes('*')){
+            if(this.remainingGuesses === 0 && this.puzzle.includes('*')){
                 this.status = "failed"
             }
             else if(!this.puzzle.includes('*')){
